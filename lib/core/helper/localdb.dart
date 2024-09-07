@@ -64,13 +64,8 @@ class LocalDB {
     final result = await db.insert('Task', task.toMap());
     // Schedule a notification one hour before the due date
 
-    DateTime notificationTime = task.dueDate.subtract(const Duration(hours: 1));
-    await NotificationService.scheduleNotification(
-      id: task.id!, // Assuming id is auto-generated
-      title: 'Task Reminder',
-      body: 'Task "${task.title}" is due soon.',
-      scheduledTime: notificationTime,
-    );
+    // DateTime notificationTime = task.dueDate.subtract(const Duration(hours: 1));
+    await NotificationService.scheduleTaskNotification(task);
     return result;
   }
 

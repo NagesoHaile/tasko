@@ -6,6 +6,6 @@ import 'package:tasko/injector.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDependencies();
-  await NotificationService.initialize();
+  await NotificationService.initializeNotifications();
   runApp(const App());
 }

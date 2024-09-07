@@ -37,11 +37,23 @@ class _AddTaskPageState extends State<AddTaskPage> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-
-    if (pickedDate != null && pickedDate != _dueDate) {
-      setState(() {
-        _dueDate = pickedDate;
-      });
+    if (pickedDate != null) {
+      final TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      );
+      if (pickedTime != null) {
+        final DateTime finalDateTime = DateTime(
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          pickedTime.hour,
+          pickedTime.minute,
+        );
+        setState(() {
+          _dueDate = finalDateTime;
+        });
+      }
     }
   }
 
