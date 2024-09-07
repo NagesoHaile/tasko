@@ -62,18 +62,18 @@ class _HomePageState extends State<HomePage> {
           }
         },
         builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Home'),
-            ),
-            body: () {
-              if (state.unCompletedTask.isNotEmpty) {
-                return Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      taskBloc.add(GetTasksEvent());
-                    },
+          return RefreshIndicator(
+            onRefresh: () async {
+              taskBloc.add(GetTasksEvent());
+            },
+            child: Scaffold(
+              appBar: AppBar(
+                title: const Text('Home'),
+              ),
+              body: () {
+                if (state.unCompletedTask.isNotEmpty) {
+                  return Padding(
+                    padding: const EdgeInsets.all(12),
                     child: ListView.builder(
                       itemCount: state.unCompletedTask.length,
                       itemBuilder: (context, index) {
@@ -94,26 +94,26 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                     ),
-                  ),
-                );
-              } else if (state.loading) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
-                );
-              } else {
-                return const Center(
-                  child: Text('No Tasks'),
-                );
-              }
-            }(),
-            drawer: const AppDrawer(),
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                context.pushNamed(AddTaskPage.routeName);
-              },
-              label: const Text('Add Task'),
+                  );
+                } else if (state.loading) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.primaryColor,
+                    ),
+                  );
+                } else {
+                  return const Center(
+                    child: Text('No Tasks'),
+                  );
+                }
+              }(),
+              drawer: const AppDrawer(),
+              floatingActionButton: FloatingActionButton.extended(
+                onPressed: () {
+                  context.pushNamed(AddTaskPage.routeName);
+                },
+                label: const Text('Add Task'),
+              ),
             ),
           );
         },

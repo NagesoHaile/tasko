@@ -4,10 +4,22 @@ import 'package:tasko/core/helper/date_time_formatter.dart';
 import 'package:tasko/features/home/bloc/task_bloc.dart';
 import 'package:tasko/injector.dart';
 
-class CompletedTaskPage extends StatelessWidget {
+class CompletedTaskPage extends StatefulWidget {
   CompletedTaskPage({super.key});
   static const String routeName = '/completed-task-page-route-name';
+
+  @override
+  State<CompletedTaskPage> createState() => _CompletedTaskPageState();
+}
+
+class _CompletedTaskPageState extends State<CompletedTaskPage> {
   final taskBloc = sl<TaskBloc>();
+  @override
+  void initState() {
+    super.initState();
+    taskBloc.add(GetTasksEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
