@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart' as sqflite;
 import 'package:tasko/features/home/model/task.dart';
+import 'package:tasko/features/notification/notification_service.dart';
 
 class LocalDB {
   static const dbName = 'initial.db';
@@ -60,7 +61,17 @@ class LocalDB {
   }
 
   Future<int> insertTask(Task task) async {
-    return await db.insert('Task', task.toMap());
+    final result = await db.insert('Task', task.toMap());
+    // Schedule a notification one hour before the due date
+
+    DateTime notificationTime = task.dueDate.subtract(const Duration(hours: 1));
+    await NotificationService.scheduleNotification(
+      id: task.id!, // Assuming id is auto-generated
+      title: 'Task Reminder',
+      body: 'Task "${task.title}" is due soon.',
+      scheduledTime: notificationTime,
+    );
+    return result;
   }
 
   Future<List<Task>> getTasks() async {
