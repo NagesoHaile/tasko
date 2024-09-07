@@ -1,5 +1,5 @@
 class Task {
-  final String? id;
+  final int? id;
   final String title;
   final String description;
   final DateTime dueDate;
@@ -15,11 +15,11 @@ class Task {
 
   factory Task.fromMap(Map<String, dynamic> json) {
     return Task(
-      id: json['id'],
+      id: json['id'] as int,
       title: json['title'],
       description: json['description'],
-      dueDate: DateTime.parse(json['dueDate']),
-      isCompleted: json['isCompleted'] == 1,
+      dueDate: DateTime.parse(json['due_date']),
+      isCompleted: json['is_completed'] == 1,
     );
   }
 
@@ -28,8 +28,8 @@ class Task {
       'id': id,
       'title': title,
       'description': description,
-      'dueDate': dueDate.toIso8601String(),
-      'isCompleted': isCompleted ? 1 : 0,
+      'due_date': dueDate.toIso8601String(),
+      'is_completed': isCompleted ? 1 : 0,
     };
   }
 }

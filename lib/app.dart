@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tasko/configs/theme/theme.dart';
+import 'package:tasko/features/home/bloc/task_bloc.dart';
 import 'package:tasko/features/settings/bloc/settings_bloc.dart';
 import 'package:tasko/features/settings/services/settings_service.dart';
 import 'package:tasko/injector.dart';
@@ -16,9 +17,9 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => sl<SettingsBloc>(),
         ),
-        // BlocProvider(
-        //   create: (context) => SubjectBloc(),
-        // ),
+        BlocProvider(
+          create: (context) => sl<TaskBloc>(),
+        ),
       ],
       child: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, state) {

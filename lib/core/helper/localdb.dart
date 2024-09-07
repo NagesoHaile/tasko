@@ -31,7 +31,7 @@ class LocalDB {
   CREATE TABLE Task (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
-    task_description TEXT,
+    description TEXT,
     due_date TEXT,
     is_completed INTEGER
   )
@@ -62,7 +62,19 @@ class LocalDB {
   Future<int> insertTask(Task task) async {
     return await db.insert('Task', task.toMap());
   }
-  // Future<List<Task>> getTasks() async {
-  //   return await db.query('Task')
-  // }
+
+  Future<List<Task>> getTasks() async {
+    final List<Map<String, dynamic>> results = await db.query('Task');
+    return List.generate(results.length, (i) {
+      return Task.fromMap(results[i]);
+    });
+  }
+
+  Future<int> completeTask(int id) async {
+    final updateCount = await db.rawUpdate(
+      'UPDATE Task SET is_completed = ? WHERE id=?',
+      [1, id],
+    );
+    return updateCount;
+  }
 }

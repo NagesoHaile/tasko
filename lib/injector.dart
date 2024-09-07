@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:tasko/core/helper/localdb.dart';
+import 'package:tasko/features/home/bloc/task_bloc.dart';
 import 'package:tasko/features/settings/bloc/settings_bloc.dart';
 import 'package:tasko/features/settings/services/settings_service.dart';
 
@@ -15,4 +16,7 @@ Future<void> initDependencies() async {
   );
   sl.registerSingleton<SettingsService>(SettingsService());
   sl.registerFactory<SettingsBloc>(() => SettingsBloc(sl()));
+
+  // task
+  sl.registerFactory<TaskBloc>(() => TaskBloc());
 }

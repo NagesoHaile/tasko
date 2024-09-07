@@ -19,23 +19,39 @@ class SettingsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Text('Theme Settings'),
+                const Divider(),
                 ThemeOption(
-                  title: 'Dark Theme',
+                  title: 'Light Theme',
                   value: (state.appTheme == AppTheme.light),
                   onTap: () {
-                    if (state.appTheme == AppTheme.light) {
-                      context.read<SettingsBloc>().add(
-                            const ThemeChangedEvent(
-                              appTheme: AppTheme.dark,
-                            ),
-                          );
-                    } else if (state.appTheme == AppTheme.dark) {
-                      context.read<SettingsBloc>().add(
-                            const ThemeChangedEvent(
-                              appTheme: AppTheme.light,
-                            ),
-                          );
-                    }
+                    context.read<SettingsBloc>().add(
+                          const ThemeChangedEvent(
+                            appTheme: AppTheme.light,
+                          ),
+                        );
+                  },
+                ),
+                ThemeOption(
+                  title: 'Dark Theme',
+                  value: (state.appTheme == AppTheme.dark),
+                  onTap: () {
+                    context.read<SettingsBloc>().add(
+                          const ThemeChangedEvent(
+                            appTheme: AppTheme.dark,
+                          ),
+                        );
+                  },
+                ),
+                ThemeOption(
+                  title: 'Use system settings',
+                  value: (state.appTheme == AppTheme.system),
+                  onTap: () {
+                    context.read<SettingsBloc>().add(
+                          const ThemeChangedEvent(
+                            appTheme: AppTheme.system,
+                          ),
+                        );
                   },
                 ),
               ],
@@ -61,13 +77,8 @@ class ThemeOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing: value ? null : const Icon(Icons.check),
-      //activeColor: AppColors.primaryColor,
-      //checkColor: AppColors.whiteAppColor,
+      trailing: value ? const Icon(Icons.check) : null,
       title: Text(title),
-      leading: value ? const Icon(Icons.sunny) : const Icon(Icons.dark_mode),
-      //value: value,
-      //controlAffinity: ListTileControlAffinity.trailing,
       onTap: onTap,
     );
   }
