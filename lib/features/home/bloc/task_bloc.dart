@@ -58,10 +58,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           taskStateType: TaskStateType.taskAdded,
         ),
       );
-    } catch (e) {
+    } catch (e, st) {
       emit(
         state.copyWith(loading: false, errorMessage: 'Something went wrong'),
       );
+      print(st);
       throw Exception(e);
     }
   }

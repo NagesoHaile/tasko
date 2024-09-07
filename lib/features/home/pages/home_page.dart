@@ -56,6 +56,10 @@ class _HomePageState extends State<HomePage> {
               message: 'Task Completed',
             );
           }
+          if (state.taskStateType == TaskStateType.taskAdded) {
+            // Automatically fetch tasks when a new task is added
+            taskBloc.add(GetTasksEvent());
+          }
         },
         builder: (context, state) {
           return RefreshIndicator(

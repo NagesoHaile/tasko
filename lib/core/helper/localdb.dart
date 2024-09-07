@@ -63,9 +63,16 @@ class LocalDB {
   Future<int> insertTask(Task task) async {
     final result = await db.insert('Task', task.toMap());
     // Schedule a notification one hour before the due date
-
-    // DateTime notificationTime = task.dueDate.subtract(const Duration(hours: 1));
-    await NotificationService.scheduleTaskNotification(task);
+    final createdTask = await db.query(
+      'Task',
+      where: 'id = ?',
+      whereArgs: [result],
+    );
+    print("Created Task ${createdTask.first}");
+    if (createdTask.isNotEmpty) {
+      await NotificationService.scheduleTaskNotification(
+          Task.fromMap(createdTask.first));
+    }
     return result;
   }
 

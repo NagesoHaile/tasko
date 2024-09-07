@@ -43,7 +43,9 @@ class NotificationService {
   }
 
   static Future<void> scheduleNotification(
-      DateTime scheduledTime, Task task) async {
+    DateTime scheduledTime,
+    Task task,
+  ) async {
     await flutterLocalNotificationsPlugin.zonedSchedule(
       task.id!,
       'Task Reminder: ${task.title}',
