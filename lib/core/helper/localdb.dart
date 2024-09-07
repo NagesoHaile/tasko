@@ -68,7 +68,6 @@ class LocalDB {
       where: 'id = ?',
       whereArgs: [result],
     );
-    print("Created Task ${createdTask.first}");
     if (createdTask.isNotEmpty) {
       await NotificationService.scheduleTaskNotification(
           Task.fromMap(createdTask.first));
