@@ -4,7 +4,6 @@ import 'package:tasko/features/completed_task/completed_task_page.dart';
 import 'package:tasko/features/home/pages/add_task_page.dart';
 import 'package:tasko/features/home/pages/home_page.dart';
 import 'package:tasko/features/settings/pages/settings_page.dart';
-import 'package:tasko/features/show_quote/data/models/quote.dart';
 import 'package:tasko/features/splash_screen/splash_screen.dart';
 
 GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -25,14 +24,14 @@ GoRouter router = GoRouter(
         path: HomePage.routeName,
         name: HomePage.routeName,
         builder: (context, state) {
-          return HomePage();
+          return const HomePage();
         },
         routes: [
           GoRoute(
             path: AddTaskPage.routeName,
             name: AddTaskPage.routeName,
             builder: (context, state) {
-              return AddTaskPage();
+              return const AddTaskPage();
             },
           ),
         ]),
@@ -40,7 +39,7 @@ GoRouter router = GoRouter(
       path: CompletedTaskPage.routeName,
       name: CompletedTaskPage.routeName,
       builder: (context, state) {
-        return CompletedTaskPage();
+        return const CompletedTaskPage();
       },
     ),
     GoRoute(

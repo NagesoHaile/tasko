@@ -5,7 +5,7 @@ import 'package:tasko/features/home/bloc/task_bloc.dart';
 import 'package:tasko/injector.dart';
 
 class CompletedTaskPage extends StatefulWidget {
-  CompletedTaskPage({super.key});
+  const CompletedTaskPage({super.key});
   static const String routeName = '/completed-task-page-route-name';
 
   @override

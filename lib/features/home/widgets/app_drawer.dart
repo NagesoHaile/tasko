@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tasko/core/colors/app_colors.dart';
 import 'package:tasko/features/completed_task/completed_task_page.dart';
-import 'package:tasko/features/home/pages/home_page.dart';
 import 'package:tasko/features/settings/pages/settings_page.dart';
-import 'package:tasko/router.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
